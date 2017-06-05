@@ -1,0 +1,5 @@
+variables.env
+node_modules
+.idea/workspace.xml
+package.json
+
