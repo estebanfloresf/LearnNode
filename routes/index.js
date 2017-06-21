@@ -78,5 +78,8 @@ router.get('/map',storeController.mapPage);
 router.post('/api/stores/:id/heart',catchErrors(storeController.heartStore));
 
 
+router.get('/hearts', authController.isloggedIn, catchErrors(storeController.getHearts));
+
+
 
 module.exports = router;
