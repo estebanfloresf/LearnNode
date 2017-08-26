@@ -44,6 +44,9 @@ const storeSchema = new mongoose.Schema({
     }
 
 
+},{
+    toJSON : {virtuals: true},
+    toObject: {virtuals: true}
 });
 
 //Define our indexes
@@ -85,5 +88,11 @@ storeSchema.statics.getTagsList = function () {
     ]);
 };
 
+
+storeSchema.virtual('reviews',{
+   ref: 'Review',
+    localField: '_id', //which field on the review
+    foreignField: 'store' //  which field on the store
+});
 
 module.exports = mongoose.model('Store', storeSchema);

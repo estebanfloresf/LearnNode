@@ -77,6 +77,7 @@ const config = {
   ]
 };
 // webpack is cranky about some packages using a soon to be deprecated API. shhhhhhh
+
 process.noDeprecation = true;
 
 module.exports = config;
