@@ -1,32 +1,27 @@
 # Learning node
 
-App for Learning Node, creating a restaurants menu shops.
+Website created for Learning Node.
 
 
-## What is this?
+# Whats the project about?
 
-Just you wait folks!
+Website for creating a restaurants menu shops.
 
-## Sample Data
+<img src="./public/images/photos/screenshot1.png"/>
 
-To load sample data, run the following command in your terminal:
+<img src="./public/images/photos/screenshot2.png"/>
 
-```bash
-npm run sample
-```
 
-If you have previously loaded in this data, you can wipe your database 100% clean with:
+And I got a certificate :smiley:
+<img src="./public/images/photos/screenshot3.png"/>
 
-```bash
-npm run blowitallaway
-```
+# Reference
 
-That will populate 16 stores with 3 authors and 41 reviews. The logins for the authors are as follows:
 
-|Name|Email (login)|Password|
-|---|---|---|
-|Wes Bos|wes@example.com|wes|
-|Debbie Downer|debbie@example.com|debbie|
-|Beau|beau@example.com|beau|
+<a href="http://wesbos.com/courses">Wes Bos Courses</a>
+
+
+
+
 
 
