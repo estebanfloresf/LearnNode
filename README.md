@@ -20,6 +20,18 @@ And I got a certificate :smiley:
 
 <a href="http://wesbos.com/courses">Wes Bos Courses</a>
 
+#Logins
+
+ The logins for the authors are as follows:
+
+
+|Name|Email (login)|Password|
+|---|---|---|
+|Wes Bos|wes@example.com|wes|
+|Debbie Downer|debbie@example.com|debbie|
+|Beau|beau@example.com|beau|
+
+
 
 
 
