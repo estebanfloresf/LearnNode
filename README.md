@@ -20,11 +20,12 @@ And I got a certificate :smiley:
 
 <a href="http://wesbos.com/courses">Wes Bos Courses</a>
 
-#Logins
+# Logins
 
- The logins for the authors are as follows:
+The logins for the authors are as follows:
 
 
+# Users to Test Site
 |Name|Email (login)|Password|
 |---|---|---|
 |Wes Bos|wes@example.com|wes|
