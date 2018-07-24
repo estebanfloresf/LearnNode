@@ -36,8 +36,10 @@ exports.isloggedIn = (req, res, next) => {
 exports.forgot = async (req, res) => {
 
 
-// 1. See if the user exists
-    const user = await User.findOne({email: req.body.email});
+    // 1. See if the user exists
+    const user = await User.findOne({
+        email: req.body.email
+    });
 
 
     if (!user) {
@@ -45,13 +47,13 @@ exports.forgot = async (req, res) => {
         res.redirect('/login');
     }
 
-// 2. Reset token and expiry on their accounts
+    // 2. Reset token and expiry on their accounts
     user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour from now
     await user.save();
 
 
-// 3. Send an email with new toker
+    // 3. Send an email with new toker
     const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
 
     await mail.send({
@@ -67,7 +69,7 @@ exports.forgot = async (req, res) => {
     req.flash('success', 'You have been sent a password reset link!');
 
 
-// 4. Redirect to login page after email token has been set
+    // 4. Redirect to login page after email token has been set
 
     res.redirect('/login');
 };
@@ -77,15 +79,19 @@ exports.reset = async (req, res) => {
 
     const user = await User.findOne({
         resetPasswordToken: req.params.token,
-        resetPasswordExpires: {$gt: Date.now()}
+        resetPasswordExpires: {
+            $gt: Date.now()
+        }
     });
 
     if (!user) {
         req.flash('error', 'Password reset is invalid or has expired');
         return res.redirect('/login');
     }
-//    If there is a user, show the rest of the form
-    res.render('reset', {title: 'Reset your password'})
+    //    If there is a user, show the rest of the form
+    res.render('reset', {
+        title: 'Reset your password'
+    })
 
 };
 
@@ -93,7 +99,7 @@ exports.reset = async (req, res) => {
 exports.confirmedPasswords = (req, res, next) => {
 
     if (req.body.password === req.body['password-confirm']) {
-        console.log("Si entra"+req.body.password+req.body['password-confirm']);
+        console.log("Si entra" + req.body.password + req.body['password-confirm']);
         return next();
     }
 
@@ -105,7 +111,9 @@ exports.confirmedPasswords = (req, res, next) => {
 exports.update = async (req, res) => {
     const user = await User.findOne({
         resetPasswordToken: req.params.token,
-        resetPasswordExpires: {$gt: Date.now()}
+        resetPasswordExpires: {
+            $gt: Date.now()
+        }
     });
     if (!user) {
         req.flash('error', 'Password reset is invalid or has expired');
@@ -113,15 +121,15 @@ exports.update = async (req, res) => {
     }
 
 
-    const setPassword = promisify(user.setPassword , user);
+    const setPassword = promisify(user.setPassword, user);
     await setPassword(req.body.password);
     user.resetPasswordExpires = undefined;
-    user.resetPasswordToken =undefined;
+    user.resetPasswordToken = undefined;
 
     const updatedUser = await user.save;
 
     await req.login(updatedUser);
-    req.flash('success','Nice! Your password has been reset!');
+    req.flash('success', 'Nice! Your password has been reset!');
     res.redirect('/');
 
 

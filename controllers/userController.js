@@ -4,12 +4,16 @@ const promisify = require('es6-promisify');
 
 
 exports.loginForm = (req, res) => {
-    res.render('login', {title: 'Login'})
+    res.render('login', {
+        title: 'Login'
+    })
 };
 
 
 exports.registerForm = (req, res) => {
-    res.render('register', {title: 'Register'})
+    res.render('register', {
+        title: 'Register'
+    })
 };
 
 
@@ -30,7 +34,11 @@ exports.validateRegister = (req, res, next) => {
 
     if (errors) {
         req.flash('error', errors.map(err => err.msg));
-        res.render('register', {title: 'Register', body: req.body, flashes: req.flash()});
+        res.render('register', {
+            title: 'Register',
+            body: req.body,
+            flashes: req.flash()
+        });
         return;
     }
     next();
@@ -39,17 +47,22 @@ exports.validateRegister = (req, res, next) => {
 
 exports.register = async (req, res, next) => {
 
-    const user = new User({email: req.body.email, name: req.body.name});
+    const user = new User({
+        email: req.body.email,
+        name: req.body.name
+    });
     const register = promisify(User.register, User);
     await register(user, req.body.password);
     next();
 };
 
-exports.account = (req,res) =>{
-    res.render('account', {title: 'Edit your Account'});
+exports.account = (req, res) => {
+    res.render('account', {
+        title: 'Edit your Account'
+    });
 };
 
-exports.updateAccount = async (req,res)=>{
+exports.updateAccount = async (req, res) => {
     const updates = {
         name: req.body.name,
         email: req.body.email
@@ -57,12 +70,18 @@ exports.updateAccount = async (req,res)=>{
 
     const user = await User.findOneAndUpdate(
 
-        {_id: req.user._id},
-        {$set: updates},
-        {new:true, runValidators: true, context:'query'}
+        {
+            _id: req.user._id
+        }, {
+            $set: updates
+        }, {
+            new: true,
+            runValidators: true,
+            context: 'query'
+        }
 
     );
-    req.flash('success',"Succesfully updated the profile");
+    req.flash('success', "Succesfully updated the profile");
     res.redirect('/account');
 
 };

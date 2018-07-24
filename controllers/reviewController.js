@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
 
-exports.addReview = async(req,res) => {
+exports.addReview = async (req, res) => {
 
     req.body.author = req.user._id;
     req.body.store = req.params.id;
@@ -10,7 +10,7 @@ exports.addReview = async(req,res) => {
 
     await newReview.save();
 
-    req.flash('success','Review Saved!');
+    req.flash('success', 'Review Saved!');
     res.redirect('back');
 
 };
