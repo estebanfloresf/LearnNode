@@ -5,12 +5,15 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const reviewController = require('../controllers/reviewController');
 
-const {catchErrors} = require('../handlers/errorHandlers');
+const {
+    catchErrors
+} = require('../handlers/errorHandlers');
 
 // Do work here
 
 router.get('/', catchErrors(storeController.getStores));
 router.get('/stores', catchErrors(storeController.getStores));
+router.get('/stores/page/:page', catchErrors(storeController.getStores));
 router.get('/add',
     authController.isloggedIn,
     storeController.addStore
@@ -66,23 +69,23 @@ router.post('/account/reset/:token',
 
 
 /*
-*
-* API
-*
-* */
+ *
+ * API
+ *
+ * */
 
 router.get('/api/search', catchErrors(storeController.searchStores));
 router.get('/api/stores/near', catchErrors(storeController.mapStores));
 
-router.get('/map',storeController.mapPage);
+router.get('/map', storeController.mapPage);
 
-router.post('/api/stores/:id/heart',catchErrors(storeController.heartStore));
+router.post('/api/stores/:id/heart', catchErrors(storeController.heartStore));
 router.post('/reviews/:id',
     authController.isloggedIn,
     catchErrors(reviewController.addReview));
 
 router.get('/hearts', authController.isloggedIn, catchErrors(storeController.getHearts));
-
+router.get('/top', catchErrors(storeController.getTopStores));
 
 
 module.exports = router;

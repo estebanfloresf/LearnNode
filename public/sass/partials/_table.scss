@@ -5,6 +5,9 @@
   }
   tr:nth-child(even) {
     background: white;
+    img {
+      background-color: #bada55;
+    }
   }
   tr:nth-child(odd):not(:first-child) {
     background: #f7f7f7;

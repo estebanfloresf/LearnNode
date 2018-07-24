@@ -704,6 +704,8 @@ label {
     padding: 5px; }
   .table tr:nth-child(even) {
     background: white; }
+    .table tr:nth-child(even) img {
+      background-color: #bada55; }
   .table tr:nth-child(odd):not(:first-child) {
     background: #f7f7f7; }
   .table thead tr {

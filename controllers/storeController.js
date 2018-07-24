@@ -24,10 +24,13 @@ const multerOptions = {
 exports.upload = multer(multerOptions).single('photo');
 
 exports.resize = async (req, res, next) => {
-    if (!req.file) {
+    if (!req.file || req.file == null) {
+
         next(); //skip to the next middleware
+        return; // stop this function from running
 
     }
+
 
     const extension = req.file.mimetype.split('/')[1];
 
@@ -76,7 +79,6 @@ exports.getStores = async (req, res) => {
         title: "Stores",
         stores
     })
-
 };
 
 
@@ -90,13 +92,10 @@ const confirmOwner = (store, user) => {
 
 exports.editStore = async (req, res) => {
 
-
-
     //    1. find the store given the id
     const store = await Store.findOne({
         _id: req.params.id
     });
-
 
     //    2. confirm they are the owner of the store
     confirmOwner(store, req.user);
@@ -111,11 +110,9 @@ exports.editStore = async (req, res) => {
 exports.updateStore = async (req, res) => {
 
     // set the location data to be a point
-
     req.body.location.type = 'Point';
 
     //find and update the store
-
     const store = await Store.findOneAndUpdate({
         _id: req.params.id
     }, req.body, {
@@ -123,7 +120,6 @@ exports.updateStore = async (req, res) => {
         runValidators: true
     }).exec();
 
-    console.log(store);
     req.flash('success', `Successfully updated <strong>${store.name}</strong>.<a href="/stores/${store.slug}">View Store -></a> `)
     //    redirect them to the store and tell them it worked
     res.redirect(`/stores/${store.id}/edit`)
@@ -247,3 +243,11 @@ exports.getHearts = async (req, res) => {
         stores
     });
 };
+
+exports.getTopStores = async (req, res) => {
+    const stores = await Store.getTopStores();
+    res.render('topStores', {
+        stores,
+        title: '⭐ Top Stores!'
+    });
+}
