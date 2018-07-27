@@ -1,0 +1,17 @@
+mixin storeTop(store={},index)
+    .store
+        .store__hero
+            .store__actions
+                
+                    span.title--top #{index}
+
+            img(src=`/uploads/${ store.photo || 'store.png'}`)
+
+            h2.title
+                a(href=`/store/${store.slug}`) #{store.name}
+        .store__details
+            - var avg = Math.ceil(store.averageRating)
+            
+            .review__stars__top(title=`Rated ${avg} out of 5 stars ` )
+                = '★'.repeat(avg)
+                = '☆'.repeat(5-avg)

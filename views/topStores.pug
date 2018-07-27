@@ -1,22 +1,25 @@
 extends layout
-
+include mixins/_storeTop
 block content
   
   .inner
     h2 Top #{stores.length} Stores
+    each store,i in stores
+        - var index =i+1
+        +storeTop(store,index)
     table.table
       thead
-        td photo
         td ranking
+        td photo
         td name
         td reviews
         td Average Rating
       each store, i in stores
         tr
+          td #{i + 1}
           td
             a(href=`/store/${store.slug}`)
               img(width=200 src=`/uploads/${store.photo || 'store.png'}` alt=store.name)
-          td #{i + 1}
           td: a(href=`/store/${store.slug}`)= store.name
           td= store.reviews.length
           td= store.averageRating.toFixed(1)

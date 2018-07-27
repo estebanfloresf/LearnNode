@@ -4,11 +4,11 @@
   border-bottom: 0;
   border-bottom: 1px solid $grey;
   margin-bottom: 2rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
   padding-left: 5px;
   &:before {
-    width:5px;
+    width: 5px;
     left: 0;
     content: '';
     display: block;
@@ -20,7 +20,7 @@
   &__header {
     border-bottom: 1px solid $grey;
     display: flex;
-    & > * {
+    &>* {
       // this is fine, don't email me about it
       border-right: 1px solid $grey;
       padding: 0.2rem;
@@ -35,7 +35,7 @@
   }
   &__author {
     justify-content: flex-start;
-    padding-left:  2rem;
+    padding-left: 2rem;
     display: flex;
     .avatar {
       margin-right: 2rem;
@@ -48,10 +48,15 @@
   &__stars {
     color: $yellow;
   }
+  &__stars__top {
+    color: $yellow;
+    text-align: center;
+    font-size: 28px;
+  }
   &__body {
     padding: 2rem;
   }
   p {
-    white-space:pre-wrap;
+    white-space: pre-wrap;
   }
 }

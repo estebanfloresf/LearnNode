@@ -1,5 +1,6 @@
 .table {
   width: 100%;
+  text-align: center;
   td {
     padding: 5px;
   }
@@ -15,5 +16,6 @@
   thead tr {
     background: $black;
     color: white;
+    text-transform: capitalize;
   }
 }
